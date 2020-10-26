@@ -1,27 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function StorageFilter() {
+  const [sizes, setSizes] = useState([])
+  const storageSizes = useSelector((state) => state.storageSizes)
+  const dispatch = useDispatch()
+
+  function handleSelect(e) {
+    dispatch({
+      type: 'SET_STORAGE_SIZES',
+      payload: e.target.checked
+        ? [...storageSizes, e.target.value]
+        : storageSizes.filter((size) => size !== e.target.value)
+    })
+  }
+
+  useEffect(() => {
+    fetch('/api/requests/sizes')
+      .then((res) => res.json())
+      .then(({ storageSizes }) => {
+        setSizes(storageSizes.sort((a, b) => parseInt(a, 10) - parseInt(b, 10)))
+      })
+    return () => {}
+  }, [])
   return (
     <>
       <h3>Storage</h3>
-      <div>
-        <div>
-          <input type="checkbox" name="storageSize[]" id="32" />
-          <label htmlFor="32">32GB</label>
-        </div>
-        <div>
-          <input type="checkbox" name="storageSize[]" id="64" />
-          <label htmlFor="64">64GB</label>
-        </div>
-        <div>
-          <input type="checkbox" onSelect={() => console.log('Hey')} name="storageSize[]" id="128" />
-          <label htmlFor="128">128GB</label>
-        </div>
-        <div>
-          <input type="checkbox" name="storageSize[]" id="256" />
-          <label htmlFor="256">256GB</label>
-        </div>
-      </div>
+      <form onChange={handleSelect}>
+        {sizes.map((size) => {
+          return (
+            <div key={size}>
+              <input type="checkbox" value={size} id={size} />
+              <label htmlFor={size}> {size}</label>
+            </div>
+          )
+        })}
+      </form>
     </>
   )
 }

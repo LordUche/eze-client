@@ -1,7 +1,7 @@
 import React from 'react'
 import toSnakeCase from '../utils/toSnakeCase'
 
-function PhoneItem({ name, storageSize, grade, price, unlocked }) {
+function PhoneItem({ name, storageSize, grade, price, unlocked, requestType }) {
   return (
     <div className="item">
       <span className="item__grade">{grade}</span>
@@ -13,7 +13,7 @@ function PhoneItem({ name, storageSize, grade, price, unlocked }) {
       <span className="item__label">Unit price</span>
       <span className="item__price">${price}</span>
       <span className="item__in-stock">1500 Available</span>
-      <button className="btn btn--primary">Buy</button>
+      <button className="btn btn--primary">{requestType}</button>
     </div>
   )
 }

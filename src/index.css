@@ -43,6 +43,17 @@ h3 {
   font-weight: 400;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button:hover,
+button:focus {
+  opacity: 0.75;
+}
+
 .container {
   width: 90%;
   max-width: 1128px;
@@ -61,7 +72,8 @@ h3 {
 }
 
 .btn {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   padding: 0.75em 2em;
   align-self: center;
@@ -70,11 +82,22 @@ h3 {
   border: none;
   text-transform: uppercase;
   font-size: 0.9rem;
+  transition: all 250ms ease-in-out;
 }
 
 .btn--primary {
   background-color: var(--accent);
   color: var(--white);
+}
+
+.divider {
+  display: inline-block;
+  align-self: center;
+  line-height: 0;
+  margin: 0.25em 0;
+  min-height: 1rem;
+  border-right: 1px solid var(--light);
+  opacity: 0.75;
 }
 
 .hero {
@@ -120,9 +143,10 @@ h3 {
 
 .sidebar {
   background-color: var(--primary);
-  padding: 1em;
+  padding: 2em 3em 2em 1em;
   border-radius: 0.25rem;
   font-size: 0.9rem;
+  align-self: flex-start;
 }
 
 .sidebar h3 {
@@ -134,10 +158,7 @@ h3 {
 }
 
 .nav__list {
-  margin: 0;
-  padding: 0;
   padding-left: 0.5em;
-  list-style: none;
 }
 
 .nav__item,
@@ -175,7 +196,7 @@ h3 {
 .item__grade {
   border: 1px solid var(--light);
   align-self: flex-end;
-  padding: 0 1em;
+  padding: 0.125em 0.5em;
 }
 
 .item__name {
@@ -196,6 +217,94 @@ h3 {
   padding: 2em;
 }
 
+div.price-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+.price-filter--controls {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.price-filter__label,
+.price-filter__input {
+  background-color: var(--light);
+  color: var(--dark);
+  font-size: 0.9rem;
+  width: auto;
+  border: none;
+  padding: 0.5em;
+}
+
+.price-filter__label {
+  border-radius: 0.25em 0 0 0.25em;
+  width: 3em;
+}
+
+.price-filter__input {
+  border-radius: 0 0.25em 0.25em 0;
+  width: 5em;
+}
+
+.pagination {
+  margin-top: 2em;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.5rem;
+}
+
+.pagination ul {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination .btn {
+  font-size: inherit;
+  display: inline-block;
+  background-color: var(--grey);
+  color: var(--light);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.pagination .active .btn {
+  background-color: var(--light);
+  color: var(--primary);
+}
+
+.pagination .prev__button,
+.pagination .next__button {
+  background-color: transparent;
+  color: var(--light);
+  border: none;
+  cursor: pointer;
+}
+
+.pagination .prev__button:disabled,
+.pagination .next__button:disabled {
+  color: var(--grey);
+  cursor: default;
+  opacity: 1;
+}
+
+.MuiSlider-root {
+  color: var(--light) !important;
+}
+
+.MuiSlider-valueLabel {
+  color: rgba(47, 52, 63, 0.9);
+}
+
 @media (min-width: 600px) {
   .row {
     flex-direction: row;
@@ -203,5 +312,9 @@ h3 {
 
   .main {
     grid-template-columns: auto 1fr;
+  }
+
+  .pagination {
+    font-size: 0.9rem;
   }
 }

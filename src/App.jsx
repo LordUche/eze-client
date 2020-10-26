@@ -7,13 +7,7 @@ function App() {
     <Router>
       <Route path="/" exact component={HomePage} />
       <footer className="footer">
-        <div className="container">
-          Copyright &copy; Lord Uche{' '}
-          <span role="img" aria-label="crown">
-            👑
-          </span>{' '}
-          2020
-        </div>
+        <div className="container">Copyright &copy; Lord Uche 2020</div>
       </footer>
     </Router>
   )
