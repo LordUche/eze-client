@@ -1,12 +1,17 @@
 import React from 'react'
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded'
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentPage } from '../store/actions'
 
-function Pagination({ totalPages, currentPage, setCurrentPage }) {
+function Pagination({ currentPage }) {
+  const totalResults = useSelector((state) => state.totalResults)
+  const totalPages = Math.ceil(totalResults / 20)
   const pageLinks = []
+  const dispatch = useDispatch()
 
   function handleClick(e) {
-    setCurrentPage(parseInt(e.currentTarget.value, 10))
+    setCurrentPage(dispatch, parseInt(e.currentTarget.value, 10))
   }
 
   function makeLink(page) {

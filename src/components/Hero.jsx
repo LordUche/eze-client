@@ -1,20 +1,16 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMinMaxPrices } from '../store/actions'
 import HeroSearch from './HeroSearch'
 
-function Hero({ showSearch }) {
+function Hero() {
+  const totalRequests = useSelector((state) => state.totalRequests)
   const dispatch = useDispatch()
 
-  async function handleClick(e) {
+  async function handleSubmit(e) {
+    e.preventDefault()
     await fetch('/api/requests', { method: 'post' })
-    fetch('/api/requests/prices/minmax')
-      .then((res) => res.json())
-      .then(({ prices }) => {
-        if (prices) {
-          dispatch({ type: 'SET_TOTAL_MIN_PRICE', payload: prices.min })
-          dispatch({ type: 'SET_TOTAL_MAX_PRICE', payload: prices.max })
-        }
-      })
+    setMinMaxPrices(dispatch)
   }
 
   return (
@@ -22,12 +18,12 @@ function Hero({ showSearch }) {
       <div className="container row">
         <div className="hero_text col">
           <h1 className="hero__title">Shop our latest available stock here</h1>
-          {showSearch ? (
+          {totalRequests ? (
             <HeroSearch />
           ) : (
-            <button onClick={handleClick} className="hero__btn btn btn--primary">
-              Add Requests
-            </button>
+            <form onSubmit={handleSubmit}>
+              <button className="hero__btn btn btn--primary">Add Requests</button>
+            </form>
           )}
         </div>
         <div className="hero__img col">

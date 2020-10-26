@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentPage } from '../store/actions'
 
 function StorageFilter() {
-  const [sizes, setSizes] = useState([])
   const storageSizes = useSelector((state) => state.storageSizes)
+  const sizes = useSelector((state) => state.allStorageSizes)
   const dispatch = useDispatch()
 
   function handleSelect(e) {
@@ -13,16 +14,9 @@ function StorageFilter() {
         ? [...storageSizes, e.target.value]
         : storageSizes.filter((size) => size !== e.target.value)
     })
+    setCurrentPage(dispatch, 1)
   }
 
-  useEffect(() => {
-    fetch('/api/requests/sizes')
-      .then((res) => res.json())
-      .then(({ storageSizes }) => {
-        setSizes(storageSizes.sort((a, b) => parseInt(a, 10) - parseInt(b, 10)))
-      })
-    return () => {}
-  }, [])
   return (
     <>
       <h3>Storage</h3>
