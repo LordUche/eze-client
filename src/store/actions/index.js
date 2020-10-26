@@ -33,7 +33,7 @@ export const setPhones = async ({
   storageSizes,
   totalRequests
 }) => {
-  let queryString = `q=${searchTerm}&page=${currentPage}`
+  let queryString = `q=${searchTerm}&page=${currentPage}&limit=8`
 
   if (minPrice) queryString += `&price[gte]=${minPrice}`
   if (maxPrice) queryString += `&price[lte]=${maxPrice}`

@@ -6,7 +6,7 @@ import { setCurrentPage } from '../store/actions'
 
 function Pagination({ currentPage }) {
   const totalResults = useSelector((state) => state.totalResults)
-  const totalPages = Math.ceil(totalResults / 20)
+  const totalPages = Math.ceil(totalResults / 8)
   const pageLinks = []
   const dispatch = useDispatch()
 
